@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate PWA Icons</title>
+</head>
+<body>
+    <h1>PWA Icon Generator</h1>
+    <p>Right-click each canvas and save as:</p>
+    <div>
+        <h3>icon-192.png</h3>
+        <canvas id="icon192" width="192" height="192"></canvas>
+    </div>
+    <div>
+        <h3>icon-512.png</h3>
+        <canvas id="icon512" width="512" height="512"></canvas>
+    </div>
+
+    <script>
+        function drawIcon(canvas) {
+            const ctx = canvas.getContext('2d');
+            const size = canvas.width;
+            
+            // Background
+            ctx.fillStyle = '#2563eb';
+            ctx.beginPath();
+            ctx.roundRect(0, 0, size, size, size * 0.15);
+            ctx.fill();
+            
+            // Calendar background
+            ctx.fillStyle = 'white';
+            ctx.strokeStyle = 'white';
+            ctx.lineWidth = size * 0.04;
+            
+            const margin = size * 0.2;
+            const calWidth = size - (margin * 2);
+            const calHeight = size * 0.6;
+            
+            ctx.beginPath();
+            ctx.roundRect(margin, margin, calWidth, calHeight, size * 0.04);
+            ctx.stroke();
+            
+            // Calendar header
+            ctx.fillRect(margin, margin, calWidth, size * 0.15);
+            
+            // Calendar dots
+            const dotRadius = size * 0.02;
+            const dotY1 = margin + size * 0.25;
+            const dotY2 = margin + size * 0.35;
+            const dotY3 = margin + size * 0.45;
+            
+            const dotX1 = margin + calWidth * 0.25;
+            const dotX2 = margin + calWidth * 0.5;
+            const dotX3 = margin + calWidth * 0.75;
+            
+            ctx.fillStyle = 'white';
+            [[dotX1, dotY1], [dotX2, dotY1], [dotX3, dotY1],
+             [dotX1, dotY2], [dotX2, dotY2], [dotX3, dotY2],
+             [dotX1, dotY3], [dotX2, dotY3]].forEach(([x, y]) => {
+                ctx.beginPath();
+                ctx.arc(x, y, dotRadius, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            
+            // Text
+            ctx.fillStyle = '#2563eb';
+            ctx.font = `bold ${size * 0.08}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('SV-SB', size / 2, margin + size * 0.075);
+        }
+
+        drawIcon(document.getElementById('icon192'));
+        drawIcon(document.getElementById('icon512'));
+    </script>
+</body>
+</html>

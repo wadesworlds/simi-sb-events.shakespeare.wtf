@@ -1,0 +1,12 @@
+{
+  "name": "Simi Valley to Santa Barbara Events",
+  "short_name": "SV-SB Events",
+  "description": "Discover events from Simi Valley to Santa Barbara",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "icons": []
+}
