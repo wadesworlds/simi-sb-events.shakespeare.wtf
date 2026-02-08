@@ -1,11 +1,11 @@
 import { useSeoMeta } from '@unhead/react';
 import { useState } from 'react';
-import { Calendar, MapPin, ExternalLink, Filter, Loader2 } from 'lucide-react';
+import { Calendar, MapPin, Filter } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useEventbriteEvents } from '@/hooks/useEventbriteEvents';
+import { useGoogleCalendarEvents } from '@/hooks/useGoogleCalendarEvents';
 
 const categories = [
   { value: 'all', label: 'All Events' },
@@ -30,11 +30,11 @@ const categoryColors: Record<string, string> = {
 
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const { data: events, isLoading, error } = useEventbriteEvents();
+  const { data: events, isLoading, error } = useGoogleCalendarEvents();
 
   useSeoMeta({
     title: 'Simi Valley to Santa Barbara Events - Discover Local Happenings',
-    description: 'Find and explore upcoming events from Simi Valley to Santa Barbara. From community gatherings to concerts, sports, arts, and more.',
+    description: 'Find and explore upcoming events from Simi Valley to Santa Barbara. Community gatherings, concerts, sports, arts, and more.',
   });
 
   const filteredEvents = selectedCategory === 'all' 
@@ -122,7 +122,6 @@ const Index = () => {
                   <Skeleton className="h-4 w-32" />
                   <Skeleton className="h-4 w-40" />
                   <Skeleton className="h-4 w-36" />
-                  <Skeleton className="h-10 w-full mt-4" />
                 </CardContent>
               </Card>
             ))}
@@ -139,7 +138,7 @@ const Index = () => {
                     Failed to load events
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    There was an error fetching events from Eventbrite. Please try again later.
+                    There was an error fetching events. Please try again later.
                   </p>
                 </div>
               </CardContent>
@@ -152,34 +151,17 @@ const Index = () => {
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {filteredEvents.map((event) => (
               <Card key={event.id} className="hover:shadow-lg transition-shadow duration-200 flex flex-col">
-                {event.imageUrl && (
-                  <div className="relative w-full h-48 overflow-hidden rounded-t-lg">
-                    <img 
-                      src={event.imageUrl} 
-                      alt={event.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                )}
                 <CardHeader className="flex-1">
                   <div className="flex items-start justify-between gap-2">
                     <div className="flex-1">
                       <CardTitle className="text-xl line-clamp-2">{event.title}</CardTitle>
                       <CardDescription className="mt-2 line-clamp-3">
-                        {event.description.substring(0, 150)}
-                        {event.description.length > 150 ? '...' : ''}
+                        {event.description}
                       </CardDescription>
                     </div>
-                    <div className="flex flex-col gap-1 items-end">
-                      <Badge className={categoryColors[event.category]}>
-                        {event.category}
-                      </Badge>
-                      {event.isFree && (
-                        <Badge variant="outline" className="text-green-600 border-green-600">
-                          Free
-                        </Badge>
-                      )}
-                    </div>
+                    <Badge className={categoryColors[event.category]}>
+                      {event.category}
+                    </Badge>
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-3">
@@ -195,17 +177,13 @@ const Index = () => {
                     <MapPin className="h-4 w-4 flex-shrink-0 mt-0.5" />
                     <span className="line-clamp-2">{event.location}</span>
                   </div>
-                  <a 
-                    href={event.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="block w-full"
-                  >
-                    <Button className="w-full mt-4" variant="outline">
-                      <ExternalLink className="h-4 w-4 mr-2" />
-                      View on Eventbrite
-                    </Button>
-                  </a>
+                  {event.calendarSource && (
+                    <div className="pt-2 border-t">
+                      <p className="text-xs text-muted-foreground">
+                        Source: {event.calendarSource}
+                      </p>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             ))}
@@ -234,7 +212,7 @@ const Index = () => {
               <CardContent className="py-12 px-8 text-center">
                 <div className="max-w-sm mx-auto space-y-6">
                   <p className="text-muted-foreground">
-                    No upcoming events found in the region. Check back soon!
+                    No upcoming events found. Check back soon!
                   </p>
                 </div>
               </CardContent>
@@ -272,7 +250,7 @@ const Index = () => {
             <div>
               <h3 className="text-sm font-semibold mb-4">Connect</h3>
               <p className="text-sm text-muted-foreground mb-4">
-                Powered by Eventbrite
+                Powered by community calendars
               </p>
               <a 
                 href="https://shakespeare.diy" 
