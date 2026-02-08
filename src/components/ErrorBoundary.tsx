@@ -54,33 +54,33 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
       }
 
       return (
-        <div className="min-h-screen bg-background flex items-center justify-center p-4">
+        <div className="min-h-screen bg-white flex items-center justify-center p-4">
           <div className="max-w-md w-full space-y-4">
             <div className="text-center">
-              <h2 className="text-2xl font-bold text-foreground mb-2">
+              <h2 className="text-2xl font-bold text-black mb-2">
                 Something went wrong
               </h2>
-              <p className="text-muted-foreground">
+              <p className="text-gray-700">
                 An unexpected error occurred. The error has been reported.
               </p>
             </div>
 
-            <div className="bg-muted p-4 rounded-lg">
-              <details className="text-sm">
-                <summary className="cursor-pointer font-medium text-foreground">
+            <div className="bg-gray-100 p-4 rounded-lg border-2 border-red-500">
+              <details className="text-sm" open>
+                <summary className="cursor-pointer font-medium text-black">
                   Error details
                 </summary>
                 <div className="mt-2 space-y-2">
                   <div>
-                    <strong className="text-foreground">Message:</strong>
-                    <p className="text-muted-foreground mt-1">
+                    <strong className="text-black">Message:</strong>
+                    <p className="text-red-700 mt-1 font-mono text-xs">
                       {this.state.error?.message}
                     </p>
                   </div>
                   {this.state.error?.stack && (
                     <div>
-                      <strong className="text-foreground">Stack trace:</strong>
-                      <pre className="text-xs text-muted-foreground mt-1 overflow-auto max-h-32">
+                      <strong className="text-black">Stack trace:</strong>
+                      <pre className="text-xs text-gray-700 mt-1 overflow-auto max-h-32 bg-white p-2 rounded border">
                         {this.state.error.stack}
                       </pre>
                     </div>
@@ -92,13 +92,13 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
             <div className="flex gap-2">
               <button
                 onClick={this.handleReset}
-                className="flex-1 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+                className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
               >
                 Try again
               </button>
               <button
                 onClick={() => window.location.reload()}
-                className="flex-1 px-4 py-2 bg-secondary text-secondary-foreground rounded-md hover:bg-secondary/90 transition-colors"
+                className="flex-1 px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors"
               >
                 Reload page
               </button>
