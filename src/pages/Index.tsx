@@ -44,29 +44,26 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-gray-900 dark:to-gray-800">
       {/* Hero Section */}
-      <div className="relative isolate overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-purple-800 dark:from-blue-900 dark:via-purple-900 dark:to-indigo-950">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,theme(colors.blue.100),transparent)] dark:bg-[radial-gradient(45rem_50rem_at_top,theme(colors.blue.950),transparent)] opacity-20"></div>
-        <div className="absolute inset-y-0 right-1/2 -z-10 mr-16 w-[200%] origin-bottom-left skew-x-[-30deg] bg-white dark:bg-gray-900 shadow-xl shadow-blue-600/10 ring-1 ring-blue-50 dark:ring-blue-950 sm:mr-28 lg:mr-0 xl:mr-16 xl:origin-center"></div>
-        
+      <div className="relative isolate overflow-hidden bg-white border-b">
         <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
           <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl">
-            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
+            <h1 className="text-4xl font-bold tracking-tight text-black sm:text-6xl">
               Discover Southern California
             </h1>
-            <p className="mt-6 text-lg leading-8 text-blue-100">
+            <p className="mt-6 text-lg leading-8 text-black">
               Explore amazing events from Simi Valley to Santa Barbara. From community gatherings to concerts, 
               workshops to festivals—discover what's happening in your area.
             </p>
             <div className="mt-10 flex items-center gap-x-6">
               <Button 
                 size="lg" 
-                variant="secondary" 
-                className="bg-white text-blue-600 hover:bg-blue-50"
+                variant="default" 
+                className="bg-blue-600 text-white hover:bg-blue-700"
                 onClick={() => document.getElementById('events')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Browse Events
               </Button>
-              <a href="#events" className="text-sm font-semibold leading-6 text-white hover:text-blue-100">
+              <a href="#events" className="text-sm font-semibold leading-6 text-black hover:text-gray-700">
                 Learn more <span aria-hidden="true">→</span>
               </a>
             </div>
