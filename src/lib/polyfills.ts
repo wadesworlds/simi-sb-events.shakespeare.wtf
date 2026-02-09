@@ -1,4 +1,5 @@
 import Buffer from 'buffer';
+import { safeLocalStorage, safeSessionStorage } from './safeStorage';
 
 /**
  * Polyfill for Buffer in browser environment
@@ -8,6 +9,29 @@ import Buffer from 'buffer';
  */
 if (!globalThis.Buffer) {
   globalThis.Buffer = Buffer.Buffer;
+}
+
+/**
+ * Safe Storage Polyfill
+ * 
+ * Override localStorage and sessionStorage to use safe wrappers that handle
+ * Safari private browsing and other security restrictions that throw
+ * "The operation is insecure" errors.
+ */
+try {
+  Object.defineProperty(window, 'localStorage', {
+    value: safeLocalStorage,
+    writable: false,
+    configurable: true
+  });
+  
+  Object.defineProperty(window, 'sessionStorage', {
+    value: safeSessionStorage,
+    writable: false,
+    configurable: true
+  });
+} catch (e) {
+  console.warn('Could not override localStorage/sessionStorage:', e);
 }
 
 /**

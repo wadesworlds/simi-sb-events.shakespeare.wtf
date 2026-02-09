@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
+import { safeLocalStorage } from '@/lib/safeStorage';
 
 /**
  * Generic hook for managing localStorage state
+ * Uses safe storage wrapper to handle Safari private browsing and security restrictions
  */
 export function useLocalStorage<T>(
   key: string,
@@ -16,7 +18,7 @@ export function useLocalStorage<T>(
 
   const [state, setState] = useState<T>(() => {
     try {
-      const item = localStorage.getItem(key);
+      const item = safeLocalStorage.getItem(key);
       return item ? deserialize(item) : defaultValue;
     } catch (error) {
       console.warn(`Failed to load ${key} from localStorage:`, error);
@@ -28,7 +30,7 @@ export function useLocalStorage<T>(
     try {
       const valueToStore = value instanceof Function ? value(state) : value;
       setState(valueToStore);
-      localStorage.setItem(key, serialize(valueToStore));
+      safeLocalStorage.setItem(key, serialize(valueToStore));
     } catch (error) {
       console.warn(`Failed to save ${key} to localStorage:`, error);
     }
