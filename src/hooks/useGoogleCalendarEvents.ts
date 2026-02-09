@@ -108,7 +108,7 @@ function parseGoogleEvent(event: GoogleCalendarEvent, calendarName: string): Par
     
     // Format time
     let timeStr = 'All Day';
-    let endTimeStr = undefined;
+    let endTimeStr: string | undefined = undefined;
     
     if (!isAllDay) {
       timeStr = startDate.toLocaleTimeString('en-US', {
