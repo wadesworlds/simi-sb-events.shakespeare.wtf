@@ -3,8 +3,10 @@ import react from "@vitejs/plugin-react-swc";
 import { defineConfig } from "vitest/config";
 import { VitePWA } from "vite-plugin-pwa";
 
+const BASE = "/simi-sb-events.shakespeare.wtf/";
+
 export default defineConfig(() => ({
-  base: "/simi-sb-events.shakespeare.wtf/",
+  base: BASE,
   server: {
     host: "::",
     port: 8080,
@@ -13,24 +15,26 @@ export default defineConfig(() => ({
     react(),
     VitePWA({
       registerType: "autoUpdate",
+      base: BASE,
       includeAssets: ["icon.svg", "apple-touch-icon.png", "icon-180.png", "icon-192.png", "icon-512.png"],
       manifest: {
         name: "Simi Valley to Santa Barbara Events",
         short_name: "SV-SB Events",
         description: "Discover events from Simi Valley to Santa Barbara",
-        start_url: "/",
-        scope: "/",
+        start_url: BASE,
+        scope: BASE,
         display: "standalone",
         background_color: "#ffffff",
         theme_color: "#2563eb",
         orientation: "portrait-primary",
         icons: [
-          { src: "/icon-192.png", sizes: "192x192", type: "image/png", purpose: "any" },
-          { src: "/icon-512.png", sizes: "512x512", type: "image/png", purpose: "any" },
-          { src: "/icon-512.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
+          { src: `${BASE}icon-192.png`, sizes: "192x192", type: "image/png", purpose: "any" },
+          { src: `${BASE}icon-512.png`, sizes: "512x512", type: "image/png", purpose: "any" },
+          { src: `${BASE}icon-512.png`, sizes: "512x512", type: "image/png", purpose: "maskable" },
         ],
       },
       workbox: {
+        globPatterns: ["**/*.{js,css,html,ico,png,svg,webmanifest}"],
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/www\.googleapis\.com\/calendar\/.*/i,
