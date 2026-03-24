@@ -1,6 +1,6 @@
 import { useSeoMeta } from '@unhead/react';
 import { useState } from 'react';
-import { Calendar, MapPin, Filter } from 'lucide-react';
+import { Calendar, Clock, MapPin, Filter } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -167,7 +167,7 @@ const Index = () => {
                     <span>{event.date}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Calendar className="h-4 w-4 flex-shrink-0" />
+                    <Clock className="h-4 w-4 flex-shrink-0" />
                     <span>{event.time}</span>
                   </div>
                   <div className="flex items-start gap-2 text-sm text-muted-foreground">
