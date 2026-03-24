@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#2563eb" rx="100"/>
+  <g fill="white">
+    <!-- Calendar icon -->
+    <rect x="120" y="100" width="272" height="312" rx="20" fill="none" stroke="white" stroke-width="24"/>
+    <rect x="120" y="100" width="272" height="80" rx="20" fill="white"/>
+    <line x1="120" y1="180" x2="392" y2="180" stroke="#2563eb" stroke-width="24"/>
+    
+    <!-- Calendar grid -->
+    <circle cx="180" cy="240" r="12" fill="white"/>
+    <circle cx="256" cy="240" r="12" fill="white"/>
+    <circle cx="332" cy="240" r="12" fill="white"/>
+    <circle cx="180" cy="300" r="12" fill="white"/>
+    <circle cx="256" cy="300" r="12" fill="white"/>
+    <circle cx="332" cy="300" r="12" fill="white"/>
+    <circle cx="180" cy="360" r="12" fill="white"/>
+    <circle cx="256" cy="360" r="12" fill="white"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="256" y="140" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#2563eb" text-anchor="middle">SV-SB</text>
+</svg>
